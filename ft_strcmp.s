@@ -8,9 +8,12 @@ _ft_strcmp:
 				xor rdx, rdx
 				xor rcx, rcx
 loop:
-				cmp byte[rsi + rcx], 0
+				mov al, byte[rdi + rcx]
+				mov dl, byte[rsi + rcx]
+				sub al, dl
+				jne return
+				cmp dl, 0
 				je return
-				mov byte[rdi + rcx], byte[rsi + rcx]
 				inc rcx
 				jmp loop
 return:
