@@ -2,17 +2,18 @@ global _ft_strcmp
 
 section .text
 _ft_strcmp:
+				push rdx
+				push rcx
 				xor rax, rax
 				xor rdx, rdx
 				xor rcx, rcx
 loop:
-				mov al, byte[rdi + rcx]
-				mov dl, byte[rsi + rcx]
-				sub al, dl
-				jne return
-				cmp dl, 0
+				cmp byte[rsi + rcx], 0
 				je return
+				mov byte[rdi + rcx], byte[rsi + rcx]
 				inc rcx
 				jmp loop
 return:
+				pop rcx
+				pop rdx
 				ret
