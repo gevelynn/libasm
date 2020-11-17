@@ -20,27 +20,13 @@
 
 int		main(void)
 {
-	char	s_long[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-	char	s_empty[] = "";
-	char 	s_empty2[] = "";
-	char 	s1[] = "hello";
-	char 	s2[] = "hello";
-	char	s3[] = "world";
-	char	dest[100] = "";
-	char	dest1[100] = "";
-	char	dest_long[446] = "";
-	char	dest_long1[446] = "";
-	int 	i;
-	int 	j;
-	char	*str;
-	char	*str1;
-	char	*str2;
-	char	*str3;
-	int 	fd;
-	int 	fd1;
-	int 	fd2;
-	int 	fd3;
-	char	*str_stdin;
+	int 	i, j;
+	char	s_long[] = "A Queen Bee from Hymettus flew up to Olympus with some fresh honey from the hive as a present to Jupiter, who was so pleased with the gift that he promised to give her anything she liked to ask for. She said she would be very grateful if he would give stings to the bees, to kill people who robbed them of their honey. Jupiter was greatly displeased with this request.";
+	char	s_empty[] = "", s_empty2[] = "";
+	char 	s1[] = "hello", s2[] = "hello", s3[] = "world";
+	int 	fd, fd1, fd2, fd3;
+	char	*str, *str1, *str2, *str3, *str_stdin;
+	char	dest[100] = "", dest1[100] = "", dest_long[446] = "", dest_long1[446] = "";
 
 	i = 0;
 	j = 0;
@@ -69,15 +55,17 @@ int		main(void)
 
 	printf("   \033[1;32m--ft_write--\033[0m\n");	//ft_write
 	ft_write(1, "STDOUT:\n", 8);
+	write(1, "ft_write: ", 10);
 	i = ft_write(1, s1, 4);
 	write(1, "\n", 1);
+	write(1, "write: ", 7);
 	j = write(1, s1, 4);
 	write(1, "\n", 1);
 	printf("ft_write ret: %7d\nwrite ret: %10d\n", i, j);
 
 	ft_write(fd2, s_long, ft_strlen(s_long));
 	write(fd3, s_long, ft_strlen(s_long));
-	printf("\033[1;34mfiles \"output_ft_write.txt\" & \"output_write.txt\" was created\033[0m\ndiff output_ft_write.txt output_write.txt\ndiff ft_write.s ft_read.s\n\n");
+	printf("\033[1;34mfiles \"output_ft_write.txt\" & \"output_write.txt\" was created\033[0m\n");
 	printf("--fd == 10--\n");
 	write(10, "error\n", 6);
 	printf("write errno code = %d\n", errno);
@@ -93,14 +81,11 @@ int		main(void)
 	perror("ft_write");
 
 	printf("   \033[1;32m--ft_read--\033[0m\n");	//ft_read
-	i = 5;
-	while (--i)
-	{
-		printf("\033[1;34mType some text for ft_read testing.\n%d attempts left...\033[0m\n", i);
-		j = ft_read(0, str_stdin, 99);
-		ft_write(1, str_stdin, j);
-		printf("\nreturn value = %d\n", j);
-	}
+	printf("\033[1;34mType some text for ft_read testing.\033[0m\n");
+	j = ft_read(0, str_stdin, 99);
+	ft_write(1, str_stdin, j);
+	printf("\nreturn value = %d\n", j);
+		
 	i = ft_read(fd, str, 99);
 	j = read(fd1, str1, 99);
 	printf("\n\033[1;34mReading 99 symbols from main.c:\033[0m\n");
